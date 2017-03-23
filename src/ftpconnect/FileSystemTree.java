@@ -4,6 +4,9 @@ import helperclasses.FileTreeModel;
 
 import javax.swing.*;
 import javax.swing.tree.TreeSelectionModel;
+
+import org.checkerframework.checker.guieffect.qual.UIEffect;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,6 +20,7 @@ public class FileSystemTree {
 	protected List<File> list;
 	protected static JTree tree;
 
+	@UIEffect
 	protected static JTree getFileSystemTree(Path path) {
 
 		FileTreeModel model = new FileTreeModel(path.toFile());
@@ -26,6 +30,7 @@ public class FileSystemTree {
 		return tree;
 	}
 
+	@UIEffect
 	protected static JTree getFileSystemFromRoot() {
 		Path path = new File(System.getProperty("user.home")).toPath();
 		path = path.getRoot();
@@ -38,11 +43,13 @@ public class FileSystemTree {
 		return tree;
 	}
 
+	@UIEffect
 	protected static File[] getPartitions() {
 		File[] partitions = File.listRoots();
 		return partitions;
 	}
 
+	@UIEffect
 	protected static File[] getRootFiles() {
 		Path path = new File(System.getProperty("user.home")).toPath();
 		path = path.getRoot();
@@ -55,6 +62,7 @@ public class FileSystemTree {
 		return rootFiles;
 	}
 
+	@UIEffect
 	protected static File[] getPathFiles(Path path) {
 		try {
 			FileTraverse.triggerTraverse(path);

@@ -2,9 +2,11 @@ package helperclasses;
 
 import ftpconnect.ButtonActionListener;
 import ftpconnect.ClientMainFrame;
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPFileFilter;
+import org.checkerframework.checker.guieffect.qual.UIEffect;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -24,6 +26,7 @@ public class RemoteTreeLoad {
 	private static DefaultMutableTreeNode rootNode;
 	public static DefaultTreeModel model;
 
+	@UIEffect
 	public RemoteTreeLoad(FTPClient ftp) {
 		ftpClient = ftp;
 		try {
@@ -67,6 +70,7 @@ public class RemoteTreeLoad {
 	class TreeSelection implements TreeSelectionListener {
 
 		@Override
+		@UIEffect
 		public void valueChanged(TreeSelectionEvent e) {
 
 			if (remoteTree.getSelectionPath() != null) {
@@ -111,6 +115,7 @@ public class RemoteTreeLoad {
 		}
 	}
 
+	@UIEffect
 	public static void traverseRemoteTree(String path, DefaultMutableTreeNode tempRoot) {
 		try {
 			FTPFile[] children = ftpClient.listFiles(path);
@@ -133,6 +138,7 @@ public class RemoteTreeLoad {
 		}
 	}
 
+	@UIEffect
 	public static String createFilePath(TreePath treePath) {
 		StringBuilder sb = new StringBuilder();
 		Object[] nodes = treePath.getPath();

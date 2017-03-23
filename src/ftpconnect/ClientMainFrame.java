@@ -8,6 +8,9 @@ import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.*;
+
+import org.checkerframework.checker.guieffect.qual.UIEffect;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +24,10 @@ import java.nio.file.Path;
 /**
  * Created by Nikhil Shinde on 4/3/2016.
  */
+
 public class ClientMainFrame extends JFrame {
+
+	private static final long serialVersionUID = 4203465929082638519L;
 
 	public static JFrame frame;
 
@@ -68,6 +74,7 @@ public class ClientMainFrame extends JFrame {
 	private static final int DELETE_FILE_ACTION = 5;
 	private static final int RENAME_FILE_ACTION = 6;
 
+	@UIEffect
 	public ClientMainFrame() {
 
 		initDimensions();
@@ -95,6 +102,7 @@ public class ClientMainFrame extends JFrame {
 		pack();
 	}
 
+	@UIEffect
 	private void initDimensions() {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenDimen = toolkit.getScreenSize();
@@ -111,6 +119,7 @@ public class ClientMainFrame extends JFrame {
 		FIELD_WIDTH = (int) (FRAME_WIDTH * 0.0068);
 	}
 
+	@UIEffect
 	private void setFieldPanel() {
 		fieldPanel = new JPanel();
 		fieldPanel.setBorder(BorderFactory.createTitledBorder("FTP Connect"));
@@ -164,11 +173,13 @@ public class ClientMainFrame extends JFrame {
 		fieldPanel.add(disconnectButton);
 	}
 
+	@UIEffect
 	private void addField(JTextComponent component, String label) {
 		fieldPanel.add(new JLabel(label));
 		fieldPanel.add(component);
 	}
 
+	@UIEffect
 	private void setLocalFilePanel() {
 		localFilePanel = new JPanel();
 		localFilePanel.setBorder(BorderFactory.createTitledBorder("Local Files"));
@@ -180,6 +191,7 @@ public class ClientMainFrame extends JFrame {
 		localFilePanel.add(localFileListPanel, BorderLayout.EAST);
 	}
 
+	@UIEffect
 	private void populateLocalFileTreePanel() {
 		localFileTreePanel = new JPanel();
 		localFileTreePanel.setLayout(new GridBagLayout());
@@ -222,8 +234,10 @@ public class ClientMainFrame extends JFrame {
 		localFileTreePanel.add(localFileTreePane, new GBC(0, 1));
 	}
 
+	
 	class TreeListener implements TreeSelectionListener {
 
+		@UIEffect
 		public void valueChanged(TreeSelectionEvent te) {
 			if (localTree.getLastSelectedPathComponent() == null) {
 				Path path = new File(System.getProperty("user.home")).toPath().getRoot();
@@ -257,6 +271,7 @@ public class ClientMainFrame extends JFrame {
 		}
 	}
 
+	@UIEffect
 	private void populateLocalFileListPanel() {
 		localFileListPanel = new JPanel();
 		localFileListPanel.setLayout(new GridBagLayout());
@@ -270,7 +285,8 @@ public class ClientMainFrame extends JFrame {
 
 		localFileListPanel.add(uploadFile, new GBC(0, 1).setFill(GBC.HORIZONTAL).setInsets(5, 0, 0, 0));
 	}
-
+	
+	@UIEffect
 	private void setRemoteFilePanel() {
 		remoteFilePanel = new JPanel();
 		remoteFilePanel.setBorder(BorderFactory.createTitledBorder("Remote Files"));
@@ -282,6 +298,7 @@ public class ClientMainFrame extends JFrame {
 		addPanel(remoteFileListPanel, remoteFilePanel);
 	}
 
+	@UIEffect
 	private void populateRemoteFileTreePanel() {
 		remoteFileTreePanel = new JPanel();
 		remoteFileTreePanel.setLayout(new GridBagLayout());
@@ -306,6 +323,7 @@ public class ClientMainFrame extends JFrame {
 				new GBC(1, 1, 1, 1).setFill(GBC.HORIZONTAL).setWeight(0.5, 0).setInsets(5, 0, 0, 0));
 	}
 
+	@UIEffect
 	private void populateRemoteFileListPanel() {
 		remoteFileListPanel = new JPanel();
 		remoteFileListPanel.setLayout(new GridBagLayout());
@@ -330,10 +348,12 @@ public class ClientMainFrame extends JFrame {
 				new GBC(2, 1, 1, 1).setFill(GBC.HORIZONTAL).setWeight(0.33, 0).setInsets(5, 0, 0, 0));
 	}
 
+	@UIEffect
 	protected void addPanel(JPanel childPanel, JPanel parentPanel) {
 		parentPanel.add(childPanel);
 	}
 
+	@UIEffect
 	private void setMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -374,6 +394,7 @@ public class ClientMainFrame extends JFrame {
 		help.add(checkUpdate);
 	}
 
+	@UIEffect
 	protected static void disableRemote() {
 		if (!ConnectHost.hostConnected) {
 			connectButton.setEnabled(true);
@@ -394,6 +415,7 @@ public class ClientMainFrame extends JFrame {
 		}
 	}
 
+	@UIEffect
 	protected static void enableRemote() {
 		connectButton.setEnabled(false);
 		disconnectButton.setEnabled(true);
@@ -409,6 +431,7 @@ public class ClientMainFrame extends JFrame {
 		deleteFile.setEnabled(true);
 	}
 
+	@UIEffect
 	protected static void resetFields() {
 		ipField.setText("");
 		portField.setText("");
@@ -416,6 +439,7 @@ public class ClientMainFrame extends JFrame {
 		passwordField.setText("");
 	}
 
+	@UIEffect
 	public static void main(String args[]) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override

@@ -5,6 +5,9 @@ import helperclasses.RemoteTreeLoad;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPFileFilter;
+import org.checkerframework.checker.guieffect.qual.UIEffect;
+import org.checkerframework.checker.i18n.qual.Localized;
+import org.checkerframework.checker.linear.qual.Unusable;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -19,6 +22,8 @@ import java.nio.file.Path;
 /**
  * Created by Nikhil Shinde on 6/3/2016.
  */
+
+
 public class ButtonActionListener implements ActionListener {
 
     private int actionCode;
@@ -29,6 +34,7 @@ public class ButtonActionListener implements ActionListener {
         this.actionCode = actionCode;
     }
 
+    @UIEffect
     public void actionPerformed(ActionEvent ae) {
         switch (actionCode) {
             case 1:
@@ -52,6 +58,7 @@ public class ButtonActionListener implements ActionListener {
         }
     }
 
+    @UIEffect
     protected void uploadLocalFile() {
         String name = (String) ClientMainFrame.localFileList.getSelectedValue();
         TreePath remotePath = RemoteTreeLoad.remoteTree.getSelectionPath();
@@ -60,7 +67,7 @@ public class ButtonActionListener implements ActionListener {
 		TreePath localPath = FileSystemTree.tree.getSelectionPath();
 
         if (localPath == null) {
-            Path root = new File(System.getProperty("user.home")).toPath();
+            @Unusable Path root = new File(System.getProperty("user.home")).toPath();
             root = root.getRoot();
             uploadSelectedPath = root.toString() + name;
         } else {
@@ -105,6 +112,7 @@ public class ButtonActionListener implements ActionListener {
         ClientMainFrame.loadDialog.showDialog();
     }
 
+    @UIEffect
     protected void deleteRemoteFolder() {
         if (RemoteTreeLoad.remoteTree.getSelectionPath() != null) {
             int selection = JOptionPane.showConfirmDialog(ClientMainFrame.frame, "Are you sure you want to permenantly delete this directory?", "Delete Directory", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, new ImageIcon("res\\alert_icon.png"));
@@ -143,6 +151,7 @@ public class ButtonActionListener implements ActionListener {
         }
     }
 
+    @UIEffect
     private boolean removeDirectory(FTPClient ftp, String parent, String current) throws IOException {
         String parentPath = parent;
         if (!current.equals("")) {
@@ -184,6 +193,7 @@ public class ButtonActionListener implements ActionListener {
         }
     }
 
+    @UIEffect
     protected void newRemoteFolder() {
         String newName = (String) JOptionPane.showInputDialog(ClientMainFrame.frame, "Enter the name of new directory", "New Directory", JOptionPane.DEFAULT_OPTION, new ImageIcon("res\\bluealert.png"), null, null);
         if (newName != null) {
@@ -218,6 +228,7 @@ public class ButtonActionListener implements ActionListener {
         }
     }
 
+    @UIEffect
     protected void downloadRemoteFile() {
         String name = (String) ClientMainFrame.remoteFileList.getSelectedValue();
         TreePath path = RemoteTreeLoad.remoteTree.getSelectionPath();
@@ -270,6 +281,7 @@ public class ButtonActionListener implements ActionListener {
         }
     }
 
+    @UIEffect
     protected void deleteRemoteFile() {
 
         int selection = new ConfirmDisconnect(ClientMainFrame.frame, "Are you sure you want to permanently delete this file?", "Delete file").getSelection();
@@ -296,6 +308,7 @@ public class ButtonActionListener implements ActionListener {
         }
     }
 
+    @UIEffect
     protected void renameRemoteFile() {
         String name = (String) ClientMainFrame.remoteFileList.getSelectedValue();
         int index = ClientMainFrame.remoteFileList.getSelectedIndex();
@@ -317,7 +330,7 @@ public class ButtonActionListener implements ActionListener {
                 String toPath = createPath(path) + "/" + newName;
 
                 if (RemoteTreeLoad.ftpClient.rename(selectedPath, toPath)) {
-                    System.out.println("Success");
+                    System.out.println((@Localized String)"Success");
                     ClientMainFrame.defaultRemoteListModel.setElementAt((String) newName, index);
                 } else {
                     System.out.println("Failure");
@@ -332,6 +345,7 @@ public class ButtonActionListener implements ActionListener {
 
     }
 
+    @UIEffect
     public static String createPath(TreePath node) {
         StringBuilder sb = new StringBuilder();
         Object[] nodes = node.getPath();
@@ -342,6 +356,7 @@ public class ButtonActionListener implements ActionListener {
         return sb.toString();
     }
 
+    @UIEffect
     public static void showServerReply(FTPClient ftpClient) {
         String[] replies = ftpClient.getReplyStrings();
         if (replies != null && replies.length > 0) {

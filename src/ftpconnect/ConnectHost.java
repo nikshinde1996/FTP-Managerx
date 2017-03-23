@@ -3,6 +3,7 @@ package ftpconnect;
 import helperclasses.RemoteTreeLoad;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.checkerframework.checker.guieffect.qual.UIEffect;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class ConnectHost {
     protected static boolean hostConnected = false;
     private static FTPClient ftpClient;
 
+    @UIEffect
     protected static void getLoginDetails() {
         String ip_address = ClientMainFrame.ipField.getText().trim();
         username = ClientMainFrame.usernameField.getText().trim();
@@ -38,12 +40,14 @@ public class ConnectHost {
         }
     }
 
+    @UIEffect
     private static void modifyClientMainFrame() {
         ClientMainFrame.frame.setTitle("FTP Client: Connected");
         ClientMainFrame.resetFields();
         ClientMainFrame.enableRemote();
     }
 
+    @UIEffect
     private static boolean resolveIPAddress(String ip_address) {
         try {
             ipaddress = InetAddress.getByName(ip_address);
@@ -56,6 +60,7 @@ public class ConnectHost {
         return true;
     }
 
+    @UIEffect
     private static boolean FTPConnect() {
         ftpClient = new FTPClient();
         try {
@@ -94,6 +99,7 @@ public class ConnectHost {
         return false;
     }
 
+    @UIEffect
     private static void serverReplies(FTPClient ftp) {
         String[] replies = ftp.getReplyStrings();
         if (replies != null) {
@@ -101,6 +107,7 @@ public class ConnectHost {
         }
     }
 
+    @UIEffect
     protected static void disconnectSession() {
         try {
             ftpClient.logout();

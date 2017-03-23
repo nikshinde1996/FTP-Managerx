@@ -6,6 +6,9 @@ import javax.swing.*;
  * Created by Nikhil Shinde on 4/3/2016.
  */
 public class ConfirmDisconnect extends JOptionPane {
+
+	private static final long serialVersionUID = -7715352496018193903L;
+
 	private static int selection;
 
 	public ConfirmDisconnect(JFrame parent, String message, String title) {
