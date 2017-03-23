@@ -3,7 +3,7 @@ package dialogs;
 import javax.swing.*;
 
 /**
- * Created by Nikhil Shinde on 14/21/2016.
+ * Created by Nikhil Shinde on 4/3/2016.
  */
 public class ConfirmDisconnect extends JOptionPane {
 	private static int selection;

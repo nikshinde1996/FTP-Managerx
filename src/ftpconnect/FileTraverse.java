@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by Nikhil Shinde on 18/21/2016.
+ * Created by Nikhil Shinde on 8/3/2016.
  */
 public class FileTraverse extends SimpleFileVisitor<Path> {
     protected static List<File> fileList = new ArrayList<>();
