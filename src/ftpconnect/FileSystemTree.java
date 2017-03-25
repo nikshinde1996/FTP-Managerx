@@ -22,11 +22,9 @@ public class FileSystemTree {
 
 	@UIEffect
 	protected static JTree getFileSystemTree(Path path) {
-
 		FileTreeModel model = new FileTreeModel(path.toFile());
 		JTree tree = new JTree(model);
 		tree.setRootVisible(true);
-
 		return tree;
 	}
 

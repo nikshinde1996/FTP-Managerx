@@ -54,7 +54,7 @@ public class ClientMainFrame extends JFrame {
 
 	// localFilePanel instances
 	private static JPanel localFileTreePanel, localFileListPanel;
-	private static DefaultListModel<Object> defaultLocalListModel = new DefaultListModel();
+	private static DefaultListModel<Object> defaultLocalListModel = new DefaultListModel<Object>();
 	protected static JList<Object> localFileList;
 	protected static JButton uploadFile;
 
@@ -234,7 +234,6 @@ public class ClientMainFrame extends JFrame {
 		localFileTreePanel.add(localFileTreePane, new GBC(0, 1));
 	}
 
-	
 	class TreeListener implements TreeSelectionListener {
 
 		@UIEffect
@@ -285,7 +284,7 @@ public class ClientMainFrame extends JFrame {
 
 		localFileListPanel.add(uploadFile, new GBC(0, 1).setFill(GBC.HORIZONTAL).setInsets(5, 0, 0, 0));
 	}
-	
+
 	@UIEffect
 	private void setRemoteFilePanel() {
 		remoteFilePanel = new JPanel();

@@ -16,7 +16,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  * Created by Nikhil Shinde on 1/3/2016.
  */
-
 public class FileTreeModel implements TreeModel {
 	protected File root;
 	FileTreeFilter fileTreeFilter = new FileTreeFilter();
@@ -36,14 +35,15 @@ public class FileTreeModel implements TreeModel {
 	}
 
 	public @NonNegative int getChildCount(Object parent) {
-	    String[] children = ((File) parent).list(fileTreeFilter);
+		String[] children = ((File) parent).list(fileTreeFilter);
 		if (children == null)
 			return 0;
 		return children.length;
 	}
- 
+
 	/**
-	 *  The current type is @LowerBoundUnknown .... Should be @Positive or @NonNegative
+	 * The current type is @LowerBoundUnknown .... Should be @Positive
+	 * or @NonNegative
 	 */
 	public @NonNull Object getChild(Object parent, @Positive int index) {
 		String[] children = ((File) parent).list(fileTreeFilter);
@@ -64,15 +64,15 @@ public class FileTreeModel implements TreeModel {
 		return -1;
 	}
 
-    @Override
+	@Override
 	public void valueForPathChanged(TreePath path, Object newvalue) {
 	}
 
-    @Override
+	@Override
 	public void addTreeModelListener(TreeModelListener l) {
 	}
 
-    @Override
+	@Override
 	public void removeTreeModelListener(TreeModelListener l) {
 	}
 

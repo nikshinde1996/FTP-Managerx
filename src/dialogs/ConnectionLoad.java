@@ -9,7 +9,6 @@ import java.awt.*;
 /**
  * Created by Nikhil Shinde on 5/3/2016.
  */
-
 public class ConnectionLoad extends JDialog {
 
 	private static final long serialVersionUID = -796468114271333260L;

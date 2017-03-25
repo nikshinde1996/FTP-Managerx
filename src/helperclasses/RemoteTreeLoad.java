@@ -16,7 +16,6 @@ import java.io.IOException;
 /**
  * Created by Nikhil Shinde on 1/3/2016.
  */
-
 public class RemoteTreeLoad {
 
 	public static FTPClient ftpClient;
