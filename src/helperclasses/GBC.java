@@ -25,32 +25,38 @@ public class GBC extends GridBagConstraints {
 		this.gridheight = gridHeight;
 	}
 
+	/* Must be annotated with @UIEffect ...*/
 	public GBC setAnchor(int anchor) {
 		this.anchor = anchor;
 		return this;
 	}
 
+	/* Must be annotated with @UIEffect ...*/
 	public GBC setFill(int fill) {
 		this.fill = fill;
 		return this;
 	}
-
+	
+	/* Must be annotated with @UIEffect ...*/
 	public GBC setWeight(double weightx, double weighty) {
 		this.weightx = weightx;
 		this.weighty = weighty;
 		return this;
 	}
 
+	/* Must be annotated with @UIEffect ...*/
 	public GBC setInsets(int distance) {
 		this.insets = new Insets(distance, distance, distance, distance);
 		return this;
 	}
 
+	/* Must be annotated with @UIEffect ...*/
 	public GBC setInsets(int top, int left, int bottom, int right) {
 		this.insets = new Insets(top, left, bottom, right);
 		return this;
 	}
 
+	/* Must be annotated with @UIEffect ...*/
 	public GBC setIpad(int ipadx, int ipady) {
 		this.ipadx = ipadx;
 		this.ipady = ipady;
