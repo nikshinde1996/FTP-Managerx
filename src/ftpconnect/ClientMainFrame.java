@@ -54,7 +54,7 @@ public class ClientMainFrame extends JFrame {
 
 	// localFilePanel instances
 	private static JPanel localFileTreePanel, localFileListPanel;
-	private static DefaultListModel defaultLocalListModel = new DefaultListModel();
+	private static DefaultListModel<Object> defaultLocalListModel = new DefaultListModel();
 	protected static JList<Object> localFileList;
 	protected static JButton uploadFile;
 

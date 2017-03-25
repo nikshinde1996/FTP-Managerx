@@ -7,7 +7,11 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPFileFilter;
 import org.checkerframework.checker.guieffect.qual.UIEffect;
 import org.checkerframework.checker.i18n.qual.Localized;
+import org.checkerframework.checker.initialization.qual.Initialized;
+import org.checkerframework.checker.linear.qual.Linear;
 import org.checkerframework.checker.linear.qual.Unusable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -27,8 +31,8 @@ import java.nio.file.Path;
 public class ButtonActionListener implements ActionListener {
 
     private int actionCode;
-    private static String downloadLocalPath = "";
-    private static String uploadSelectedPath = "";
+    private static @Localized String downloadLocalPath = "";
+    private static @Localized String uploadSelectedPath = "";
 
     public ButtonActionListener(int actionCode) {
         this.actionCode = actionCode;
@@ -61,8 +65,8 @@ public class ButtonActionListener implements ActionListener {
     @UIEffect
     protected void uploadLocalFile() {
         String name = (String) ClientMainFrame.localFileList.getSelectedValue();
-        TreePath remotePath = RemoteTreeLoad.remoteTree.getSelectionPath();
-        String remoteSelected = createPath(remotePath) + "/" + name;
+        @Linear TreePath remotePath = RemoteTreeLoad.remoteTree.getSelectionPath();
+        @Localized String remoteSelected = createPath(remotePath) + "/" + name;
 
 		TreePath localPath = FileSystemTree.tree.getSelectionPath();
 
@@ -230,7 +234,7 @@ public class ButtonActionListener implements ActionListener {
 
     @UIEffect
     protected void downloadRemoteFile() {
-        String name = (String) ClientMainFrame.remoteFileList.getSelectedValue();
+        @NonNull String name = (String) ClientMainFrame.remoteFileList.getSelectedValue();
         TreePath path = RemoteTreeLoad.remoteTree.getSelectionPath();
         String selectedPath = createPath(path) + "/" + name;
 
@@ -242,7 +246,7 @@ public class ButtonActionListener implements ActionListener {
             }
 
             @Override
-            public String getDescription() {
+            public @Nullable String getDescription() {
                 return null;
             }
         });
@@ -308,12 +312,13 @@ public class ButtonActionListener implements ActionListener {
         }
     }
 
-    @UIEffect
+    @SuppressWarnings("unchecked")
+	@UIEffect
     protected void renameRemoteFile() {
         String name = (String) ClientMainFrame.remoteFileList.getSelectedValue();
         int index = ClientMainFrame.remoteFileList.getSelectedIndex();
         try {
-            String newName = (String) JOptionPane.showInputDialog(ClientMainFrame.frame, "Enter the new name:", "Rename", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("res\\bluealert.png"), null, null);
+            @Initialized @NonNull String newName = (String) JOptionPane.showInputDialog(ClientMainFrame.frame, "Enter the new name:", "Rename", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("res\\bluealert.png"), null, null);
             String check = "";
             if (newName != null) check = newName.replaceAll(" ", "");
 
@@ -330,7 +335,7 @@ public class ButtonActionListener implements ActionListener {
                 String toPath = createPath(path) + "/" + newName;
 
                 if (RemoteTreeLoad.ftpClient.rename(selectedPath, toPath)) {
-                    System.out.println((@Localized String)"Success");
+                    System.out.println("Success");
                     ClientMainFrame.defaultRemoteListModel.setElementAt((String) newName, index);
                 } else {
                     System.out.println("Failure");

@@ -6,6 +6,13 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import org.checkerframework.checker.i18n.qual.Localized;
+import org.checkerframework.checker.index.qual.LowerBoundUnknown;
+import org.checkerframework.checker.index.qual.NonNegative;
+import org.checkerframework.checker.index.qual.Positive;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * Created by Nikhil Shinde on 1/3/2016.
  */
@@ -18,22 +25,27 @@ public class FileTreeModel implements TreeModel {
 		this.root = root;
 	}
 
-	public Object getRoot() {
+	@Override
+	public @NonNull Object getRoot() {
 		return root;
 	}
 
+	@Override
 	public boolean isLeaf(Object node) {
 		return ((File) node).isFile();
 	}
 
-	public int getChildCount(Object parent) {
-		String[] children = ((File) parent).list(fileTreeFilter);
+	public @NonNegative int getChildCount(Object parent) {
+	    String[] children = ((File) parent).list(fileTreeFilter);
 		if (children == null)
 			return 0;
 		return children.length;
 	}
-
-	public Object getChild(Object parent, int index) {
+ 
+	/**
+	 *  The current type is @LowerBoundUnknown .... Should be @Positive or @NonNegative
+	 */
+	public @NonNull Object getChild(Object parent, @Positive int index) {
 		String[] children = ((File) parent).list(fileTreeFilter);
 		if ((children == null) || (index >= children.length))
 			return null;
@@ -52,12 +64,15 @@ public class FileTreeModel implements TreeModel {
 		return -1;
 	}
 
+    @Override
 	public void valueForPathChanged(TreePath path, Object newvalue) {
 	}
 
+    @Override
 	public void addTreeModelListener(TreeModelListener l) {
 	}
 
+    @Override
 	public void removeTreeModelListener(TreeModelListener l) {
 	}
 
