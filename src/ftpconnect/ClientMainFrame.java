@@ -25,6 +25,7 @@ import java.nio.file.Path;
  * Created by Nikhil Shinde on 4/3/2016.
  */
 
+@SuppressWarnings("initialization")
 public class ClientMainFrame extends JFrame {
 
 	private static final long serialVersionUID = 4203465929082638519L;

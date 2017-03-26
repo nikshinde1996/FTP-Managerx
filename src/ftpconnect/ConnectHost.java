@@ -13,6 +13,7 @@ import java.net.InetAddress;
 /**
  * Created by Nikhil Shinde on 5/3/2016.
  */
+@SuppressWarnings("signature")
 public class ConnectHost {
 
 	protected static String username;

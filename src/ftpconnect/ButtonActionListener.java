@@ -26,7 +26,7 @@ import java.nio.file.Path;
 /**
  * Created by Nikhil Shinde on 6/3/2016.
  */
-
+@SuppressWarnings("initialization")
 public class ButtonActionListener implements ActionListener {
 
 	private int actionCode;
